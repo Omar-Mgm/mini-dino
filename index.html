@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mini Dino Touch</title>
+  <style>
+    body { margin: 0; background: #eee; }
+    #game {
+      width: 100%; max-width: 600px; height: 200px;
+      background: white; border: 2px solid black;
+      margin: 20px auto; position: relative; overflow: hidden;
+    }
+    #player {
+      width: 30px; height: 30px; background: black;
+      position: absolute; bottom: 0; left: 50px;
+    }
+    #obstacle {
+      width: 20px; height: 40px; background: red;
+      position: absolute; bottom: 0; left: 600px;
+    }
+    #msg {
+      text-align: center; font-size: 20px; font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align:center">Mini Dino (Tap para saltar)</h1>
+  <div id="game">
+    <div id="player"></div>
+    <div id="obstacle"></div>
+  </div>
+  <p id="msg">Toca dentro del juego para saltar</p>
+
+  <script>
+    const player = document.getElementById("player");
+    const obstacle = document.getElementById("obstacle");
+    const msg = document.getElementById("msg");
+    let jumping = false;
+    let gameOver = false;
+
+    function jump() {
+      if (jumping) return;
+      jumping = true;
+      let pos = 0;
+      const up = setInterval(() => {
+        if (pos >= 100) {
+          clearInterval(up);
+          const down = setInterval(() => {
+            if (pos <= 0) {
+              clearInterval(down);
+              jumping = false;
+            } else {
+              pos -= 5;
+              player.style.bottom = pos + "px";
+            }
+          }, 20);
+        } else {
+          pos += 5;
+          player.style.bottom = pos + "px";
+        }
+      }, 20);
+    }
+
+    document.getElementById("game").addEventListener("touchstart", jump);
+
+    function moveObstacle() {
+      if (gameOver) return;
+      let pos = 600;
+      obstacle.style.left = pos + "px";
+      const timer = setInterval(() => {
+        if (gameOver) { clearInterval(timer); return; }
+        pos -= 5;
+        obstacle.style.left = pos + "px";
+
+        const playerBottom = parseInt(player.style.bottom || "0");
+        if (pos < 80 && pos > 50 && playerBottom < 40) {
+          msg.innerText = "¡Game Over!";
+          gameOver = true;
+          clearInterval(timer);
+          // 🔄 Reiniciar después de 1.5 segundos
+          setTimeout(() => {
+            msg.innerText = "Toca dentro del juego para saltar";
+            player.style.bottom = "0px";
+            gameOver = false;
+            moveObstacle();
+          }, 1500);
+        }
+
+        if (pos <= -20) {
+          clearInterval(timer);
+          moveObstacle();
+        }
+      }, 20);
+    }
+
+    moveObstacle();
+  </script>
+</body>
+</html>
