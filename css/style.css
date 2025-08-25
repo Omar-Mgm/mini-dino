@@ -2,6 +2,12 @@ body {
   margin: 0; 
   background: #eee; 
 }
+#score {
+  text-align: center;
+  font-size: 18px;
+  font-family: sans-serif;
+  margin-top: 10px;
+}
 
 #game {
   width: 100%; max-width: 600px; height: 200px;

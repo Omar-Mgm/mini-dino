@@ -3,6 +3,16 @@ const obstacle = document.getElementById("obstacle");
 const msg = document.getElementById("msg");
 let jumping = false;
 let gameOver = false;
+let score = 0;
+const scoreEl = document.getElementById("score");
+
+// Aumenta el puntaje 1 cada segundo
+const scoreInterval = setInterval(() => {
+  if (!gameOver) {       // solo suma si el juego no terminó
+    score += 1;
+    scoreEl.innerText = "Puntaje: " + score;
+  }
+}, 1000);
 
 function jump() {
   if (jumping) return;
@@ -46,6 +56,7 @@ function moveObstacle() {
       setTimeout(() => {
         msg.innerText = "Toca dentro del juego para saltar";
         player.style.bottom = "0px";
+        score = 0;
         gameOver = false;
         moveObstacle();
       }, 1500);
