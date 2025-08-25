@@ -1,6 +1,6 @@
 body { 
   margin: 0; 
-  background: #eee; 
+  background: #044e3c; 
 }
 #score {
   text-align: center;
@@ -8,22 +8,39 @@ body {
   font-family: sans-serif;
   margin-top: 10px;
 }
+#resultado {
+  text-align: center;
+  font-size: 20px;
+  font-family: sans-serif;
+  margin-top: 10px;
+}
 
 #game {
-  width: 100%; max-width: 600px; height: 200px;
-  background: white; border: 2px solid black;
+  width: 100%; max-width: 600px; height: 200px; 
+  background: #c90505; border: 2px solid black;
   margin: 20px auto; position: relative; overflow: hidden;
 }
 
 #player {
-  width: 30px; height: 30px; background: black;
-  position: absolute; bottom: 0; left: 50px;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  left: 50px;
+  background-image: url('../img/player.png'); /* ruta a tu imagen */
+  background-size: cover; /* ajusta la imagen al div */
 }
 
 #obstacle {
-  width: 20px; height: 40px; background: red;
-  position: absolute; bottom: 0; left: 600px;
+  width: 20px;
+  height: 40px;
+  position: absolute;
+  bottom: 0;
+  left: 600px;
+  background-image: url('../img/obstacle.png');
+  background-size: cover;
 }
+
 
 #msg {
   text-align: center; font-size: 20px; font-family: sans-serif;

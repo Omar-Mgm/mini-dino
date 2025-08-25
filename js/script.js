@@ -4,7 +4,9 @@ const msg = document.getElementById("msg");
 let jumping = false;
 let gameOver = false;
 let score = 0;
+let mejor_puntaje=0;
 const scoreEl = document.getElementById("score");
+const resultEl =document.getElementById("resultado");
 
 // Aumenta el puntaje 1 cada segundo
 const scoreInterval = setInterval(() => {
@@ -38,6 +40,7 @@ function jump() {
 }
 
 document.getElementById("game").addEventListener("touchstart", jump);
+document.getElementById("game").addEventListener("mousedown",jump);
 
 function moveObstacle() {
   if (gameOver) return;
@@ -51,10 +54,15 @@ function moveObstacle() {
     const playerBottom = parseInt(player.style.bottom || "0");
     if (pos < 80 && pos > 50 && playerBottom < 40) {
       msg.innerText = "¡Game Over!";
+      if (score>= mejor_puntaje){
+        resultEl.innerText='Tu mejor puntaje es: '+ score
+        mejor_puntaje=score
+      }
+      
       gameOver = true;
       clearInterval(timer);
       setTimeout(() => {
-        msg.innerText = "Toca dentro del juego para saltar";
+        msg.innerText = "Toca dentro del juego para reiniciar";
         player.style.bottom = "0px";
         score = 0;
         gameOver = false;
