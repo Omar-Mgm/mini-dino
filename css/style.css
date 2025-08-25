@@ -1,0 +1,28 @@
+body { 
+  margin: 0; 
+  background: #eee; 
+}
+
+#game {
+  width: 100%; max-width: 600px; height: 200px;
+  background: white; border: 2px solid black;
+  margin: 20px auto; position: relative; overflow: hidden;
+}
+
+#player {
+  width: 30px; height: 30px; background: black;
+  position: absolute; bottom: 0; left: 50px;
+}
+
+#obstacle {
+  width: 20px; height: 40px; background: red;
+  position: absolute; bottom: 0; left: 600px;
+}
+
+#msg {
+  text-align: center; font-size: 20px; font-family: sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
